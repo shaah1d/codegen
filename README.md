@@ -29,7 +29,7 @@ This project is a **Code Generator** that leverages **Google's Generative AI API
 If you have any questions, suggestions, or feedback about this project, feel free to reach out:
 
 - **Email**: [writetoshaahid@gmail.com](mailto:writetoshaahid@gmail.com)
-- **Twitter**: [@shaah1d](x.com/shaah1d)
+- **Twitter**: [@shaah1d](https://x.com/shaah1d)
 
 I’m always open to collaborating or discussing ideas related to this project or any other tech topics!
 
