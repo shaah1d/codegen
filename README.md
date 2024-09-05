@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Code Generator using Google API, AceTrinity, and Next.js
 
-## Getting Started
+This project is a **Code Generator** that leverages **Google's Generative AI API** to generate code snippets based on user input. The frontend is built using **Next.js** for React-based UI, while **AceTrinity** is used to enhance the user interface with visually appealing elements and smooth transitions.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Google Generative AI Integration**: Uses Google Generative AI to create code snippets based on prompts.
+- **AceTrinity Integration**: Enhances the UI with stylish components and animations.
+- **Dynamic Code Generation**: Users can input questions or tasks and receive dynamically generated code or explanations.
+- **Next.js for SEO & Performance**: Server-side rendering and optimization provided by Next.js.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js**: Framework for server-side rendering and building web applications.
+- **Google Generative AI**: For generating code snippets from user input.
+- **AceTrinity**: UI enhancement library for animations and styles.
+- **TypeScript**: Type-safe development with TypeScript support.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Setup and Installation
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js (v16.x)
+- Google Cloud account with access to Generative AI API
+- AceTrinity library installed
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+If you have any questions, suggestions, or feedback about this project, feel free to reach out:
 
-## Deploy on Vercel
+- **Email**: [writetoshaahid@gmail.com](mailto:writetoshaahid@gmail.com)
+- **Twitter**: [@shaah1d](x.com/shaah1d)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+I’m always open to collaborating or discussing ideas related to this project or any other tech topics!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
