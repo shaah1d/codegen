@@ -30,7 +30,7 @@ export function PlaceholdersAndVanishInputDemo() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const genAI = new GoogleGenerativeAI('AIzaSyDvO1wNf6PYMJzVUIl-WNwP3E0PlEMXwV4');
+    const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_APP_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = processInput(input);
