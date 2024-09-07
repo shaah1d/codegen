@@ -1,9 +1,9 @@
 "use client";
 import { PlaceholdersAndVanishInput } from "../components/ui/placeholders-and-vanish-input";
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { motion } from "framer-motion";
-import { AuroraBackground } from "../components/ui/aurora-background";
 
 export function PlaceholdersAndVanishInputDemo() {
   const placeholders = [
@@ -23,7 +23,7 @@ export function PlaceholdersAndVanishInputDemo() {
   };
 
   const processInput = (input: string): string => {
-    const defaultPrompt = "Generate in JSON format with three properties: heading, code, and content. Remove the ```json tags from the first and last lines.";
+    const defaultPrompt = "Generate a JSON with properties: heading, code, content, and language; then in the content property add other properties which are the subheadings of the content; omit ```json tags, and use /n for line breaking.";
     return `${defaultPrompt} : ${input}`;
   };
 
@@ -37,19 +37,17 @@ export function PlaceholdersAndVanishInputDemo() {
 
     try {
       const result = await model.generateContent(prompt);
-      const responseText = await result.response.text(); // Await the text here
+      const responseText = await result.response.text(); 
       console.log(responseText);
 
-      // Parse the JSON response
       const jsonfile = JSON.parse(responseText);
 
-      // Update the state with parsed JSON
       setData(jsonfile);
       setError('');
 
     } catch (err) {
-      console.error('Error:', err);  // Use `err` instead of `error`
-      setData(''); // Clear data on error
+      console.error('Error:', err);  
+      setData('');
       if (err instanceof Error && err.message.includes('SAFETY')) {
         setError('The generated content was blocked due to safety concerns. Please try a different prompt.');
       } else {
@@ -59,39 +57,50 @@ export function PlaceholdersAndVanishInputDemo() {
   };
 
   return (
-    <div className="bg-black color-white">
-      <AuroraBackground>
-        <motion.div
-          initial={{ opacity: 0.0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="relative flex flex-col gap-4 items-center justify-center px-4"
-        >
-          <div className="h-screen flex flex-col justify-center items-center px-4">
-            {data ? (
-              <>
-                <h1 className="font-bold">{data.heading}</h1>
-                <code>{data.code}</code>
-                <p>{data.content}</p>
-              </>
+    <div className="grid grid-cols-1 sm:grid-cols-12 min-h-screen">
+    
+      <div className="hidden sm:block sm:col-span-3"></div>
+
+     
+      <div className="flex flex-col col-span-1 sm:col-span-6 justify-center items-center px-4">
+        {data ? (
+          <>
+            <h1 className="font-bold text-3xl sm:text-4xl p-8">{data.heading}</h1>
+
+ 
+            <SyntaxHighlighter language={data.language} style={materialLight} className="block whitespace-pre-wrap bg-gray-100 text-black p-4 rounded-lg mb-4 font-mono text-sm leading-relaxed">
+              {data.code}
+            </SyntaxHighlighter>
+
+          
+            {data.content && typeof data.content === 'object' ? (
+              Object.entries(data.content).map(([key, value], index) => (
+                <div key={index}>
+                  <h3 className="font-bold text-xl">{key}</h3>
+                  <p className="mb-4">{value}</p>
+                </div>
+              ))
             ) : (
-              <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl text-black font-bold">
-                Ask <span style={{ color: "darkblue" }}>CodeGen</span> Anything.
-              </h2>
+              <p>{data.content}</p>
             )}
 
-            <PlaceholdersAndVanishInput
-              placeholders={placeholders}
-              onChange={handleChange}
-              onSubmit={onSubmit}
-            />
-          </div>
-        </motion.div>
-      </AuroraBackground>
+          </>
+        ) : (
+          <h2 className="mb-10 sm:mb-20 text-2xl sm:text-5xl text-center text-black font-bold">
+            Ask <span className="text-blue-700">CodeGen</span> Anything.
+          </h2>
+        )}
+        <div className="sticky bottom-0 w-full bg-white">
+          <PlaceholdersAndVanishInput
+            placeholders={placeholders}
+            onChange={handleChange}
+            onSubmit={onSubmit}
+          />
+        </div>
+      </div>
+
+      <div className="hidden sm:block sm:col-span-3"></div>
     </div>
+
   );
 }
